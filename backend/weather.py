@@ -1,15 +1,20 @@
 from datetime import datetime, timedelta
 import requests
 from backend.formatweather import format_weather
-def getweather(city,date,days):
+def get_coordination(city):
     url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1"
     response = requests.get(url, timeout=5)
     data = response.json()
     if "results" in data:
         lat = data["results"][0]["latitude"]
         lon = data["results"][0]["longitude"]
+        return lat, lon
     else:
-        return ("location not found")
+        return None, None
+def getweather(city,date,days):
+    lat, lon = get_coordination(city)
+    if lat is None or lon is None:
+        return "Location not found"
     start_date_obj = datetime.strptime(date, "%Y-%m-%d")
     end_date_obj = start_date_obj + timedelta(days=days-1)
     end_date = end_date_obj.strftime("%Y-%m-%d")

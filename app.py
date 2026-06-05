@@ -1,6 +1,8 @@
 import streamlit as st
+import pandas as pd
 from backend.backend import generate_trip_plan
 from backend.llm_service import render_trip_plan
+from backend.weather import get_coordination
 st.set_page_config(page_title="AI Trip Planner", page_icon=":earth_americas:", layout="wide")
 st.markdown("""
 <style>
@@ -175,6 +177,19 @@ with tab1:
 
             with output.container():
                 render_trip_plan(result, st)
+                st.markdown("---")
+                st.markdown(f"<h2 style='text-align:center;color: #F0EDCC;'>Explore {destination}</h2>", unsafe_allow_html=True)
+                
+                lat, lon = get_coordination(destination)
+                
+                if lat and lon:
+                    # st.map requires a DataFrame with 'lat' and 'lon' columns
+                    map_data = pd.DataFrame({'lat': [lat], 'lon': [lon]})
+                    
+                    # You can adjust the zoom level (default is usually around 11 for cities)
+                    st.map(map_data, zoom=11, use_container_width=True)
+                else:
+                    st.info(f"Map coordinates for {destination} could not be loaded at this time.")
 with tab2:
 
     st.subheader("About Voyage AI 🌍")
@@ -219,9 +234,9 @@ with tab3:
 💼 LinkedIn: https://linkedin.com/in/irfan-khan-92185031b  
 🔗 GitHub: https://github.com/Irfan-lab700  
 
-### 👨‍💻 Raj Gaurav  
-💼 LinkedIn: https://www.linkedin.com/in/raj-gourav    
-🔗 GitHub: https://github.com/raj0828   
+### 👨‍💻 Raj Gourav  Singh
+💼 LinkedIn: https://www.linkedin.com/in/raj-gourav  
+🔗 GitHub: https://github.com/raj0828 
 
 ---
 
