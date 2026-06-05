@@ -220,8 +220,8 @@ with tab3:
 🔗 GitHub: https://github.com/Irfan-lab700  
 
 ### 👨‍💻 Raj Gaurav  
-💼 LinkedIn: https://linkedin.com/in/yourprofile  
-🔗 GitHub: https://github.com/Irfan-lab700  
+💼 LinkedIn: https://www.linkedin.com/in/raj-gourav    
+🔗 GitHub: https://github.com/raj0828   
 
 ---
 
