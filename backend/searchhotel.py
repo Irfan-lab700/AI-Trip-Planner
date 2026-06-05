@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from backend.formathotel import format_hotels
 from dotenv import load_dotenv
 load_dotenv()
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=86400 ,show_spinner=False)
 def search_hotels(city,travel_date,days):
     url = "https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels"
     querystring = {
